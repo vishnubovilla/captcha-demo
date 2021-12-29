@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="" https://www.thymeleaf.org/>
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Register User</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container p-3 my-3 border">
+    <div class="card">
+        <div class="card-header bg-info text-black">
+            <h3>User Registration</h3>
+        </div>
+
+        <div class="card-body">
+            <form th:action="@{/user/save}" method="post" th:object="${user}">
+                <input type="hidden" th:field="${user.id}">
+                <div class="row">
+                    <div class="col-2">
+                        <label>NAME</label>
+                    </div>
+                    <div class="row-4">
+                        <input type="text" th:field="${user.name}" class="form-control">
+                    </div>
+                </div>
+                <!-- NAME : <input type="text"  th:field="${user.name}"/> -->
+                <br>
+
+                <div class="row">
+                    <div class="col-2">
+                        <label>EMAIL</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="text" th:field="${user.email}" class="form-control">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-2">
+                        <label>CAPTCHA</label>
+                    </div>
+                    <div class="col-4">
+                        <img th:src="${'data:realCaptcha/jpg;base64,'+ user.realCaptcha}"/>
+                    </div>
+                </div>
+                <br>
+
+                <div class="row">
+                    <div class="col-2">
+                        <label>ENTER CAPTCHA</label>
+                    </div>
+                    <div class="col-4">
+                        <input type="hidden" th:field="${user.hiddenCaptcha}">
+                        <input type="text" th:field="${user.captcha}" class="form-control">
+                    </div>
+                </div>
+                <br>
+
+                <!-- EMAIL : <input type="text"  th:field="${user.email}"/> -->
+
+                <div class="col-md-4 col-md-offset-4 text-center">
+                    <input type="submit" value="Register" class="btn btn-success">
+                </div>
+            </form>
+            <br>
+        </div>
+
+        <div th:if="${message!=null}" class="card-footer bg-info text-white">
+            <span class="alert alert-danger" th:text="${message}"></span>
+        </div>
+    </div>
+</div>
+</body>
+</html>
